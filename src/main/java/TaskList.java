@@ -2,24 +2,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<String> items = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
-    public void add(String item) {
-        items.add(item);
+    public void add(String description) {
+        tasks.add(new Task(description));
+    }
+
+    public Task get(int index) {
+        return tasks.get(index);
     }
 
     public String getFormattedList() {
-        if (items.isEmpty()) {
-            return "(no items yet)";
+        if (tasks.isEmpty()) {
+            return "(no tasks yet)";
         }
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < items.size(); i++) {
-            sb.append(i + 1).append(". ").append(items.get(i));
-            if (i < items.size() - 1) {
-                sb.append("\n");
-            }
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1)
+                    .append(".")
+                    .append(tasks.get(i).toDisplayString())
+                    .append("\n");
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }
