@@ -4,8 +4,12 @@ import java.util.List;
 public class TaskList {
     private final List<Task> tasks = new ArrayList<>();
 
-    public void add(String description) {
-        tasks.add(new Task(description));
+    public void add(Task task) {
+        tasks.add(task);
+    }
+
+    public int size() {
+        return tasks.size();
     }
 
     public Task get(int index) {
@@ -14,7 +18,7 @@ public class TaskList {
 
     public String getFormattedList() {
         if (tasks.isEmpty()) {
-            return "(no tasks yet)";
+            return "Here are the tasks in your list:\n(no tasks yet)";
         }
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");

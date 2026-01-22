@@ -43,10 +43,60 @@ public class ComSci {
                 continue;
             }
 
+            if (input.startsWith("todo ")) {
+                String desc = input.substring(5).trim();
+                ToDo todo = new ToDo(desc);
+                taskList.add(todo);
+                ui.echo("Got it. I've added this task:\n"
+                        + "  " + todo.toDisplayString() + "\n"
+                        + "Now you have " + taskList.size() + " tasks in the list.");
+                continue;
+            }
+
+            if (input.startsWith("deadline ")) {
+                String rest = input.substring(9).trim();
+                String[] parts = rest.split(" /by ", 2);
+                String desc = parts[0].trim();
+                String by = parts.length < 2 ? "" : parts[1].trim();
+
+                Deadline d = new Deadline(desc, by);
+                taskList.add(d);
+                ui.echo("Got it. I've added this task:\n"
+                        + "  " + d.toDisplayString() + "\n"
+                        + "Now you have " + taskList.size() + " tasks in the list.");
+                continue;
+            }
+
+            if (input.startsWith("event ")) {
+                String rest = input.substring(6).trim();
+                String[] a = rest.split(" /from ", 2);
+                String desc = a[0].trim();
+
+                String from = "";
+                String to = "";
+                if (a.length == 2) {
+                    String[] b = a[1].split(" /to ", 2);
+                    from = b[0].trim();
+                    if (b.length == 2) {
+                        to = b[1].trim();
+                    }
+                }
+                Event e = new Event(desc, from, to);
+                taskList.add(e);
+                ui.echo("Got it. I've added this task:\n"
+                        + "  " + e.toDisplayString() + "\n"
+                        + "Now you have " + taskList.size() + " tasks in the list.");
+                continue;
+            }
+
             // Default: add task
-            taskList.add(input);
-            ui.echo("added: " + input);
+            taskList.add(new ToDo(input));
+            ui.echo("Got it. I've added this task:\n"
+                    + "  " + taskList.get(taskList.size() - 1).toDisplayString() + "\n"
+                    + "Now you have " + taskList.size() + " tasks in the list.");
         }
+
+        scanner.close();
     }
 
     public static void main(String[] args) {
