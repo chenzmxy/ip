@@ -16,6 +16,9 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public Task remove(int index) {
+        return tasks.remove(index);
+    }
     public String getFormattedList() {
         if (tasks.isEmpty()) {
             return "Here are the tasks in your list:\n(no tasks yet)";

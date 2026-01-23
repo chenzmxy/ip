@@ -129,6 +129,29 @@ public class ComSci {
             return true;
         }
 
+        if (input.startsWith("delete")) {
+            if (input.equals("delete")) {
+                throw new ComSciException("Bro! What am I supposed to delete? E.g. delete 2");
+            }
+
+            int index;
+            try {
+                index = Integer.parseInt(input.substring(7).trim()) - 1;
+            } catch (NumberFormatException e) {
+                throw new ComSciException("Bro! I need a number!. E.g. delete 2");
+            }
+
+            if (index < 0 || index >= taskList.size()) {
+                throw new ComSciException("Bro! That task number is out of range!");
+            }
+
+            Task removed = taskList.remove(index);
+
+            ui.echo("Noted. I've removed this task:\n"
+                    + "  " + removed.toDisplayString() + "\n"
+                    + "Now you have " + taskList.size() + " tasks in the list.");
+            return true;
+        }
         // Default: add task
         throw new ComSciException(
                 "Sorry, Idk what you talking about."
