@@ -1,3 +1,9 @@
+package ComSci.main;
+
+import ComSci.exception.ComSciException;
+import ComSci.storage.Storage;
+import ComSci.task.TaskList;
+import ComSci.ui.UI;
 import java.util.Scanner;
 
 public class ComSci {

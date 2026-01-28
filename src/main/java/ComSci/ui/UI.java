@@ -1,3 +1,5 @@
+package ComSci.ui;
+
 public class UI {
     private static final String LINE =
             "————————————————————————————————";

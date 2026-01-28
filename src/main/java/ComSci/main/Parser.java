@@ -1,3 +1,15 @@
+package ComSci.main;
+
+import ComSci.exception.ComSciException;
+import ComSci.storage.Storage;
+import ComSci.task.Task;
+import ComSci.task.ToDo;
+import ComSci.task.Event;
+import ComSci.task.Deadline;
+import ComSci.task.TaskList;
+import ComSci.ui.UI;
+import ComSci.util.DateTimeUtil;
+
 public class Parser {
     private final UI ui;
     private final TaskList taskList;
@@ -9,7 +21,7 @@ public class Parser {
         this.storage = storage;
     }
 
-    public boolean handleCommand(String input) throws ComSciException{
+    public boolean handleCommand(String input) throws ComSciException {
 
 
         if (input.equals("bye")) {
