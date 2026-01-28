@@ -98,15 +98,16 @@ public class ComSci {
         }
 
         if (input.startsWith("deadline")) {
-            if (!input.contains(" /by ")) {
-                throw new ComSciException(
-                        "Bro! What time are you talking about?"
-                );
-            }
             String rest = input.substring(9).trim();
             String[] parts = rest.split(" /by ", 2);
             String desc = parts[0].trim();
-            String by = parts.length < 2 ? "" : parts[1].trim();
+            String byStr = parts.length < 2 ? "" : parts[1].trim();
+            if (byStr.isEmpty()) {
+                throw new ComSciException("Bro! What time are you talking about?");
+            }
+
+            java.time.LocalDateTime by = DateTimeUtil.parseUserDateTime(byStr);
+            Deadline d = new Deadline(desc, by);
 
             if (parts[0].isEmpty()) {
                 throw new ComSciException(
@@ -114,7 +115,7 @@ public class ComSci {
                 );
             }
 
-            Deadline d = new Deadline(desc, by);
+
             taskList.add(d);
             storage.save(taskList);
 
@@ -139,7 +140,6 @@ public class ComSci {
             if (desc.isEmpty()) {
                 throw new ComSciException("Bro! What's the event about?");
             }
-
             String from = "";
             String to = "";
             if (a.length == 2) {
@@ -149,7 +149,12 @@ public class ComSci {
                     to = b[1].trim();
                 }
             }
-            Event e = new Event(desc, from, to);
+
+            java.time.LocalDateTime fromDt = DateTimeUtil.parseUserDateTime(from);
+            java.time.LocalDateTime toDt = DateTimeUtil.parseUserDateTime(to);
+
+            Event e = new Event(desc, fromDt, toDt);
+
             taskList.add(e);
             storage.save(taskList);
             ui.echo("Got it. I've saved this task:\n"

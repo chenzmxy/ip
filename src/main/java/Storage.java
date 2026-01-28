@@ -81,16 +81,17 @@ public class Storage {
                 case "D": {
                     if (parts.length < 4) return null;
                     String desc = parts[2];
-                    String by = parts[3];
+                    java.time.LocalDateTime by = java.time.LocalDateTime.parse(parts[3].trim());
                     Deadline d = new Deadline(desc, by);
+
                     d.setDone(isDone);
                     return d;
                 }
                 case "E": {
                     if (parts.length < 5) return null;
                     String desc = parts[2];
-                    String from = parts[3];
-                    String to = parts[4];
+                    java.time.LocalDateTime from = java.time.LocalDateTime.parse(parts[3].trim());
+                    java.time.LocalDateTime to = java.time.LocalDateTime.parse(parts[4].trim());
                     Event e = new Event(desc, from, to);
                     e.setDone(isDone);
                     return e;

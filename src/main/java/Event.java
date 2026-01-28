@@ -1,9 +1,11 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
 
-    private final String from;
-    private final String to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
