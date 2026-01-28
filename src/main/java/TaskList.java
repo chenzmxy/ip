@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskList {
@@ -19,6 +20,12 @@ public class TaskList {
     public Task remove(int index) {
         return tasks.remove(index);
     }
+
+    public List<Task> asUnmodifiableList() {
+        return Collections.unmodifiableList(tasks);
+    }
+
+
     public String getFormattedList() {
         if (tasks.isEmpty()) {
             return "Here are the tasks in your list:\n(no tasks yet)";

@@ -9,4 +9,9 @@ public class ToDo extends Task{
         return "[T]" + super.toDisplayString();
     }
 
+    @Override
+    public String toStorageString() {
+        return "T | " + (isDone ? 1 : 0) + " | " + description;
+    }
+
 }

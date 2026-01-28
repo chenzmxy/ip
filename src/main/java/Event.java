@@ -13,4 +13,9 @@ public class Event extends Task {
     public String toDisplayString() {
         return "[E]" + super.toDisplayString() + " (from: " + from + " to: " + to + ")";
     }
+
+    @Override
+    public String toStorageString() {
+        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + from + " | " + to;
+    }
 }

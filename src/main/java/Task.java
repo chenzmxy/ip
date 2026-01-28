@@ -19,7 +19,15 @@ public class Task {
         return isDone ? "X" : " ";
     }
 
+    public void setDone(boolean done) {
+        this.isDone = done;
+    }
+
     public String toDisplayString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String toStorageString() {
+        return "T | " + (isDone ? 1 : 0) + " | " + description;
     }
 }
