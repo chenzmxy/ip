@@ -4,8 +4,12 @@ public class ComSci {
     private final UI ui = new UI();
     private final TaskList taskList = new TaskList();
     private final Scanner scanner = new Scanner(System.in);
+    private final Storage storage = new Storage();
+
+
 
     public void run() {
+        storage.loadInto(taskList);
         ui.greeting();
 
         boolean isRunning = true;
@@ -37,37 +41,57 @@ public class ComSci {
         }
 
         if (input.startsWith("mark ")) {
-            int index = Integer.parseInt(input.substring(5)) - 1;
+            int index;
+            try {
+                index = Integer.parseInt(input.substring(5).trim()) - 1;
+            } catch (NumberFormatException e) {
+                throw new ComSciException("Bro! I need a number!. E.g. mark 2");
+            }
+
+            if (index < 0 || index >= taskList.size()) {
+                throw new ComSciException("Bro! That task number is out of range!");
+            }
+
             Task task = taskList.get(index);
             task.markDone();
-            ui.echo(
-                    "Nice! I've marked this task as done:\n" +
-                            task.toDisplayString()
-            );
+            storage.save(taskList);
+
+            ui.echo("Nice! I've marked this task as done:\n" + task.toDisplayString());
             return true;
         }
+
 
         if (input.startsWith("unmark ")) {
-            int index = Integer.parseInt(input.substring(7)) - 1;
+            int index;
+            try {
+                index = Integer.parseInt(input.substring(7).trim()) - 1;
+            } catch (NumberFormatException e) {
+                throw new ComSciException("Bro! I need a number!. E.g. unmark 2");
+            }
+
+            if (index < 0 || index >= taskList.size()) {
+                throw new ComSciException("Bro! That task number is out of range!");
+            }
+
             Task task = taskList.get(index);
             task.unmark();
-            ui.echo(
-                    "OK, I've marked this task as not done yet:\n" +
-                            task.toDisplayString()
-            );
+            storage.save(taskList);
+
+            ui.echo("OK, I've marked this task as not done yet:\n" + task.toDisplayString());
             return true;
         }
 
+
         if (input.startsWith("todo")) {
-            if (input.equals("todo")) {
-                throw new ComSciException(
-                        "Bro! Why never do anything one!"
-                );
+            String desc = input.length() > 4 ? input.substring(4).trim() : "";
+
+            if (desc.isEmpty()) {
+                throw new ComSciException("Bro! Why never do anything one!");
             }
-            String desc = input.substring(5).trim();
             ToDo todo = new ToDo(desc);
             taskList.add(todo);
-            ui.echo("Got it. I've added this task:\n"
+            storage.save(taskList);
+            ui.echo("Got it. I've saved this task:\n"
                     + "  " + todo.toDisplayString() + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.");
             return true;
@@ -92,9 +116,9 @@ public class ComSci {
 
             Deadline d = new Deadline(desc, by);
             taskList.add(d);
+            storage.save(taskList);
 
-
-            ui.echo("Got it. I've added this task:\n"
+            ui.echo("Got it. I've saved this task:\n"
                     + "  " + d.toDisplayString() + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.");
             return true;
@@ -112,6 +136,10 @@ public class ComSci {
             String[] a = rest.split(" /from ", 2);
             String desc = a[0].trim();
 
+            if (desc.isEmpty()) {
+                throw new ComSciException("Bro! What's the event about?");
+            }
+
             String from = "";
             String to = "";
             if (a.length == 2) {
@@ -123,7 +151,8 @@ public class ComSci {
             }
             Event e = new Event(desc, from, to);
             taskList.add(e);
-            ui.echo("Got it. I've added this task:\n"
+            storage.save(taskList);
+            ui.echo("Got it. I've saved this task:\n"
                     + "  " + e.toDisplayString() + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.");
             return true;
@@ -146,6 +175,7 @@ public class ComSci {
             }
 
             Task removed = taskList.remove(index);
+            storage.save(taskList);
 
             ui.echo("Noted. I've removed this task:\n"
                     + "  " + removed.toDisplayString() + "\n"
