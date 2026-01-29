@@ -40,7 +40,6 @@ public class ComSci {
 
 
     public static void main(String[] args) {
-
         new ComSci().run();
     }
 }

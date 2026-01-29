@@ -15,7 +15,6 @@ public class Event extends Task {
 
     @Override
     public String toDisplayString() {
-
         return "[E]" + super.toDisplayString() + " (from: " + from + " to: " + to + ")";
     }
 

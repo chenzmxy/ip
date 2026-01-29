@@ -120,9 +120,7 @@ public class Parser {
 
             // when the deadline task has no details
             if (parts[0].isEmpty()) {
-                throw new ComSciException(
-                        "Bro! Why u never do anything?"
-                );
+                throw new ComSciException("Bro! Why u never do anything?");
             }
 
 
