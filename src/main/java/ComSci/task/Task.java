@@ -1,6 +1,8 @@
 package ComSci.task;
 
 public class Task {
+
+    // base class for the ToDo, Deadline, Event classes
     protected final String description;
     protected boolean isDone;
 

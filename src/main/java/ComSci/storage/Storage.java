@@ -35,7 +35,7 @@ public class Storage {
 
     public void loadInto(TaskList taskList) {
         if (!Files.exists(FILE_PATH)) {
-            return; // first run: file doesn't exist, that's ok
+            return;
         }
 
         try {

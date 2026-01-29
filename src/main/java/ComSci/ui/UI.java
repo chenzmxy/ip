@@ -1,6 +1,7 @@
 package ComSci.ui;
 
 public class UI {
+    // user interface to initiate basic interactions: greetings and farewell
     private static final String LINE =
             "————————————————————————————————";
     public void greeting() {

@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class TaskList {
+
+    // tasklist class to store a list of tasks and to manage adding/deleting tasks
     private final List<Task> tasks = new ArrayList<>();
 
     public void add(Task task) {
-
         tasks.add(task);
     }
 
@@ -17,22 +18,21 @@ public class TaskList {
     }
 
     public Task get(int index) {
-
         return tasks.get(index);
     }
 
     public Task remove(int index) {
-
         return tasks.remove(index);
     }
 
     public List<Task> asUnmodifiableList() {
-
         return Collections.unmodifiableList(tasks);
     }
 
 
     public String getFormattedList() {
+
+        // handle the base case (when there are no elements in the list)
         if (tasks.isEmpty()) {
             return "Here are the tasks in your list:\n(no tasks yet)";
         }

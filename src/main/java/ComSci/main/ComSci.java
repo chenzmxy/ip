@@ -7,13 +7,17 @@ import ComSci.ui.UI;
 import java.util.Scanner;
 
 public class ComSci {
+    //base class of the programme
+
     private final UI ui = new UI();
     private final TaskList taskList = new TaskList();
     private final Scanner scanner = new Scanner(System.in);
     private final Storage storage = new Storage();
     private final Parser parser = new Parser(ui, taskList, storage);
 
-
+    /**
+     * runs the entire programme
+     */
     public void run() {
         storage.loadInto(taskList);
         ui.greeting();
