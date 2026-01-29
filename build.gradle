@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClass = "ComSci.main.ComSci"
+    mainClass.set("ComSci.main.ComSci")
 }
 
 shadowJar {
-    archiveBaseName = "ComSci"
+    archiveBaseName = 'ComSci'
     archiveClassifier = null
 }
 
