@@ -29,6 +29,18 @@ public class TaskList {
         return Collections.unmodifiableList(tasks);
     }
 
+    public List<Task> findByKeyword(String keyword) {
+        String needle = keyword.trim().toLowerCase();
+        List<Task> results = new ArrayList<>();
+
+        for (Task t : tasks) { // assuming your internal list is called tasks
+            String hay = t.getDescription().toLowerCase();
+            if (hay.contains(needle)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
 
     public String getFormattedList() {
 

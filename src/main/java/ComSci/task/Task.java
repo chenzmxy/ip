@@ -19,6 +19,10 @@ public class Task {
         isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     protected String getStatusIcon() {
         return isDone ? "X" : " ";
     }

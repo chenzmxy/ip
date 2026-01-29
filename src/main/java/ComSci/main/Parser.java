@@ -198,6 +198,18 @@ public class Parser {
                     + "Now you have " + taskList.size() + " tasks in the list.");
             return true;
         }
+
+        if (input.startsWith("find")) {
+            String keyword = input.length() > 4 ? input.substring(4).trim() : "";
+
+            if (keyword.isEmpty()) {
+                throw new ComSciException("Bro! Find what sia? E.g. find book");
+            }
+
+            java.util.List<Task> found = taskList.findByKeyword(keyword);
+            ui.echo(ui.formatFoundTasks(found));
+            return true;
+        }
         // Default: add task
         throw new ComSciException(
                 "Sorry, Idk what you talking about."
