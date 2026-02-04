@@ -6,6 +6,10 @@ import ComSci.task.TaskList;
 import ComSci.ui.UI;
 import java.util.Scanner;
 
+
+/**
+ * The main ComSci class for the project
+ */
 public class ComSci {
     //base class of the programme
 
@@ -29,7 +33,8 @@ public class ComSci {
                 String input = scanner.nextLine().trim();
                 isRunning = parser.handleCommand(input);
             } catch (ComSciException e) {
-                ui.echo(e.getMessage());   // show error
+                ui.echo(e.getMessage());
+                //show error
             }
         }
 
