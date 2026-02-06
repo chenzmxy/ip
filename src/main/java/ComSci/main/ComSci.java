@@ -1,10 +1,12 @@
 package ComSci.main;
 
+import java.util.Scanner;
+
 import ComSci.exception.ComSciException;
 import ComSci.storage.Storage;
 import ComSci.task.TaskList;
 import ComSci.ui.UI;
-import java.util.Scanner;
+
 
 
 /**
@@ -42,6 +44,13 @@ public class ComSci {
 
     }
 
+    /**
+     * Generates a response for the user's chat message.
+     * @param input
+     */
+    public String getResponse(String input) {
+        return "Hey bro! " + input;
+    }
 
 
     public static void main(String[] args) {

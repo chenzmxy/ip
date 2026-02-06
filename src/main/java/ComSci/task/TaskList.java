@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The task list class: use to manage the list of tasks
+ */
 public class TaskList {
 
     // tasklist class to store a list of tasks and to manage adding/deleting tasks
@@ -29,6 +32,11 @@ public class TaskList {
         return Collections.unmodifiableList(tasks);
     }
 
+    /**
+     * finds the name of the task by its keyword
+     * @param keyword
+     * @return
+     */
     public List<Task> findByKeyword(String keyword) {
         String needle = keyword.trim().toLowerCase();
         List<Task> results = new ArrayList<>();

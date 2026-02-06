@@ -2,10 +2,18 @@ package ComSci.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * The deadline class
+ */
 public class Deadline extends Task {
 
     private final LocalDateTime by;
 
+    /**
+     * constructor
+     * @param description
+     * @param by
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;

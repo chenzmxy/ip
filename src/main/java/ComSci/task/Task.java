@@ -1,11 +1,18 @@
 package ComSci.task;
 
+/**
+ * the parent clas: Task
+ */
 public class Task {
 
     // base class for the ToDo, Deadline, Event classes
     protected final String description;
     protected boolean isDone;
 
+    /**
+     * constructor method
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

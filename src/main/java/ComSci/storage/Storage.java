@@ -1,12 +1,5 @@
 package ComSci.storage;
 
-import ComSci.exception.ComSciException;
-import ComSci.task.ToDo;
-import ComSci.task.TaskList;
-import ComSci.task.Task;
-import ComSci.task.Event;
-import ComSci.task.Deadline;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,10 +7,26 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import ComSci.exception.ComSciException;
+import ComSci.task.Deadline;
+import ComSci.task.Event;
+import ComSci.task.Task;
+import ComSci.task.TaskList;
+import ComSci.task.ToDo;
+
+
+
+/**
+ * This class is to save the list from previous chat
+ */
 public class Storage {
     // relative path from project root (OS-independent)
     private static final Path FILE_PATH = Paths.get("data", "comsci.txt");
 
+    /**
+     * saves the list generated from the chat
+     * @param taskList
+     */
     public void save(TaskList taskList) {
         try {
             Files.createDirectories(FILE_PATH.getParent()); // handle folder not exist yet
@@ -33,6 +42,10 @@ public class Storage {
         }
     }
 
+    /**
+     * loads the saved list
+     * @param taskList
+     */
     public void loadInto(TaskList taskList) {
         if (!Files.exists(FILE_PATH)) {
             return;
@@ -59,14 +72,19 @@ public class Storage {
      * E | 0 | project meeting | Aug 6th 2pm | Aug 6th 4pm
      */
     private Task parseLine(String line) {
-        if (line == null) return null;
+        if (line == null) {
+            return null;
+        }
         line = line.trim();
-        if (line.isEmpty()) return null;
+        if (line.isEmpty()) {
+            return null;
+        }
 
         // split by | with optional spaces around it
         String[] parts = line.split("\\s*\\|\\s*");
-        if (parts.length < 3) return null;
-
+        if (parts.length < 3) {
+            return null;
+        }
         String type = parts[0].trim();
         String doneStr = parts[1].trim();
 
@@ -81,32 +99,36 @@ public class Storage {
 
         try {
             switch (type) {
-                case "T": {
-                    String desc = parts[2];
-                    ToDo t = new ToDo(desc);
-                    t.setDone(isDone);
-                    return t;
-                }
-                case "D": {
-                    if (parts.length < 4) return null;
-                    String desc = parts[2];
-                    java.time.LocalDateTime by = java.time.LocalDateTime.parse(parts[3].trim());
-                    Deadline d = new Deadline(desc, by);
-
-                    d.setDone(isDone);
-                    return d;
-                }
-                case "E": {
-                    if (parts.length < 5) return null;
-                    String desc = parts[2];
-                    java.time.LocalDateTime from = java.time.LocalDateTime.parse(parts[3].trim());
-                    java.time.LocalDateTime to = java.time.LocalDateTime.parse(parts[4].trim());
-                    Event e = new Event(desc, from, to);
-                    e.setDone(isDone);
-                    return e;
-                }
-                default:
+            case "T": {
+                String desc = parts[2];
+                ToDo t = new ToDo(desc);
+                t.setDone(isDone);
+                return t;
+            }
+            case "D": {
+                if (parts.length < 4) {
                     return null;
+                }
+                String desc = parts[2];
+                java.time.LocalDateTime by = java.time.LocalDateTime.parse(parts[3].trim());
+                Deadline d = new Deadline(desc, by);
+
+                d.setDone(isDone);
+                return d;
+            }
+            case "E": {
+                if (parts.length < 5) {
+                    return null;
+                }
+                String desc = parts[2];
+                java.time.LocalDateTime from = java.time.LocalDateTime.parse(parts[3].trim());
+                java.time.LocalDateTime to = java.time.LocalDateTime.parse(parts[4].trim());
+                Event e = new Event(desc, from, to);
+                e.setDone(isDone);
+                return e;
+            }
+            default:
+                return null;
             }
         } catch (Exception ex) {
             // corruption safety net

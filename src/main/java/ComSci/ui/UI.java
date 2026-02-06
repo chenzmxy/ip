@@ -3,10 +3,17 @@ package ComSci.ui;
 import ComSci.task.Task;
 import java.util.List;
 
+/**
+ * The UI class for user interface
+ */
 public class UI {
     // user interface to initiate basic interactions: greetings and farewell
     private static final String LINE =
             "————————————————————————————————";
+
+    /**
+     * greets the users
+     */
     public void greeting() {
         System.out.println(LINE + "\n"
                         + "Hello! I'm ComSci\n"
@@ -15,6 +22,11 @@ public class UI {
         );
     }
 
+    /**
+     * some standard interactions with the user inputs
+     * @param found
+     * @return
+     */
     public String formatFoundTasks(List<Task> found) {
         if (found.isEmpty()) {
             return "Here are the matching tasks in your list:\n(no matches found)";
@@ -30,6 +42,10 @@ public class UI {
         return sb.toString().trim();
     }
 
+    /**
+     * print messages
+     * @param s
+     */
     public void echo(String s) {
         System.out.println(
                 LINE + "\n"
@@ -38,6 +54,9 @@ public class UI {
         );
     }
 
+    /**
+     * farewell
+     */
     public void showBye() {
         System.out.println(LINE + "\n"
                         + "Bye. Hope to see you again soon!\n"

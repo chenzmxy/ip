@@ -2,14 +2,17 @@ package ComSci.main;
 
 import ComSci.exception.ComSciException;
 import ComSci.storage.Storage;
-import ComSci.task.Task;
-import ComSci.task.ToDo;
-import ComSci.task.Event;
 import ComSci.task.Deadline;
+import ComSci.task.Event;
+import ComSci.task.Task;
 import ComSci.task.TaskList;
+import ComSci.task.ToDo;
 import ComSci.ui.UI;
 import ComSci.util.DateTimeUtil;
 
+/**
+ * This class handles the command input from the user
+ */
 public class Parser {
     // This class will handle the command input for the programme
 
@@ -17,6 +20,9 @@ public class Parser {
     private final TaskList taskList;
     private final Storage storage;
 
+    /**
+     * Constructor
+     */
     public Parser(UI ui, TaskList taskList, Storage storage) {
         this.ui = ui;
         this.taskList = taskList;

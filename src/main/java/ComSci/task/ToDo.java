@@ -1,5 +1,8 @@
 package ComSci.task;
 
+/**
+ * the ToDo class
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {
