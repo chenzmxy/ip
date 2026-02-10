@@ -21,15 +21,13 @@ public class Parser {
     private final Storage storage;
 
     /**
-     * Constructor
+     * Constructor method
      */
     public Parser(UI ui, TaskList taskList, Storage storage) {
         this.ui = ui;
         this.taskList = taskList;
         this.storage = storage;
     }
-
-
     /**
      * possible input:
      * bye: greets goodbye from ui class and terminate
@@ -196,7 +194,7 @@ public class Parser {
                 throw new ComSciException("Bro! That task number is out of range!");
             }
 
-            Task removed = taskList.remove(index);
+            Task removed = taskList.delete(index);
             storage.save(taskList);
 
             ui.echo("Noted. I've removed this task:\n"

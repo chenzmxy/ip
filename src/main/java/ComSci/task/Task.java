@@ -14,15 +14,28 @@ public class Task {
      * @param description
      */
     public Task(String description) {
+        assert description != null : "Bro! You do what sia?";
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Marks the task as done.
+     *
+     * Throws an assertion error if the task is already marked as done.
+     */
     public void markDone() {
+        assert !isDone : "Bro! You already marked this task as done!";
         isDone = true;
     }
 
+    /**
+     * Unmarks the task as not done.
+     *
+     * If the task is not already marked as done, an assertion error will be thrown.
+     */
     public void unmark() {
+        assert isDone : "Bro! The task not done!";
         isDone = false;
     }
 

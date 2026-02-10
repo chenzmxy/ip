@@ -18,6 +18,7 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
+        assert from.isBefore(to) : "Bro! Are you time traveler? The time wrong already!";
         this.from = from;
         this.to = to;
     }

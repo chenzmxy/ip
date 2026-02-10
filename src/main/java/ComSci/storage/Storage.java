@@ -47,6 +47,7 @@ public class Storage {
      * @param taskList
      */
     public void loadInto(TaskList taskList) {
+        assert taskList.size() >= 0 : "Bro! Why ur list size negative one?";
         if (!Files.exists(FILE_PATH)) {
             return;
         }

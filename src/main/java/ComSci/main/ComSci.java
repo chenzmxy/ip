@@ -33,7 +33,10 @@ public class ComSci {
         while (isRunning) {
             try {
                 String input = scanner.nextLine().trim();
+                assert input != null
+                        && !input.isEmpty() : "Bro! You message invisible is it!";
                 isRunning = parser.handleCommand(input);
+                assert isRunning == true || isRunning == false : "Bro! Why got some weird weird stuff?";
             } catch (ComSciException e) {
                 ui.echo(e.getMessage());
                 //show error
