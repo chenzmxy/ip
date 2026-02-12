@@ -35,7 +35,6 @@ public class Storage {
             for (Task t : taskList.asUnmodifiableList()) {
                 lines.add(t.toStorageString());
             }
-
             Files.write(FILE_PATH, lines); // CREATE + TRUNCATE by default
         } catch (IOException e) {
             throw new ComSciException("Bro! I cannot save your tasks: " + e.getMessage());
@@ -54,15 +53,23 @@ public class Storage {
 
         try {
             List<String> lines = Files.readAllLines(FILE_PATH);
-            for (String line : lines) {
-                Task t = parseLine(line);
-                if (t != null) {
-                    taskList.add(t);
-                }
-                // stretch goal (corruption): if null, we just skip the bad line
-            }
+            addTasks(lines, taskList);
         } catch (IOException e) {
             throw new ComSciException("Bro! I cannot load your tasks: " + e.getMessage());
+        }
+    }
+
+    /**
+     *  adds a task into the tasklist
+     * @param lines
+     * @param taskList
+     */
+    private void addTasks(List<String> lines, TaskList taskList) {
+        for (String line : lines) {
+            Task t = parseLine(line);
+            if (t != null) {
+                taskList.add(t);
+            }
         }
     }
 
@@ -101,32 +108,13 @@ public class Storage {
         try {
             switch (type) {
             case "T": {
-                String desc = parts[2];
-                ToDo t = new ToDo(desc);
-                t.setDone(isDone);
-                return t;
+                return parseToDoline(parts, isDone);
             }
             case "D": {
-                if (parts.length < 4) {
-                    return null;
-                }
-                String desc = parts[2];
-                java.time.LocalDateTime by = java.time.LocalDateTime.parse(parts[3].trim());
-                Deadline d = new Deadline(desc, by);
-
-                d.setDone(isDone);
-                return d;
+                return parseDeadline(parts, isDone);
             }
             case "E": {
-                if (parts.length < 5) {
-                    return null;
-                }
-                String desc = parts[2];
-                java.time.LocalDateTime from = java.time.LocalDateTime.parse(parts[3].trim());
-                java.time.LocalDateTime to = java.time.LocalDateTime.parse(parts[4].trim());
-                Event e = new Event(desc, from, to);
-                e.setDone(isDone);
-                return e;
+                return parseEvent(parts, isDone);
             }
             default:
                 return null;
@@ -135,5 +123,40 @@ public class Storage {
             // corruption safety net
             return null;
         }
+    }
+
+    /**
+     * parse different tasks into the memory
+     * @param parts
+     * @param isDone
+     * @return
+     */
+    private Task parseToDoline(String[] parts, boolean isDone) {
+        String desc = parts[2];
+        ToDo t = new ToDo(desc);
+        t.setDone(isDone);
+        return t;
+    }
+    private Task parseDeadline(String[] parts, boolean isDone) {
+        if (parts.length < 4) {
+            return null;
+        }
+        String desc = parts[2];
+        java.time.LocalDateTime by = java.time.LocalDateTime.parse(parts[3].trim());
+        Deadline d = new Deadline(desc, by);
+
+        d.setDone(isDone);
+        return d;
+    }
+    private Task parseEvent(String[] parts, boolean isDone) {
+        if (parts.length < 5) {
+            return null;
+        }
+        String desc = parts[2];
+        java.time.LocalDateTime from = java.time.LocalDateTime.parse(parts[3].trim());
+        java.time.LocalDateTime to = java.time.LocalDateTime.parse(parts[4].trim());
+        Event e = new Event(desc, from, to);
+        e.setDone(isDone);
+        return e;
     }
 }
