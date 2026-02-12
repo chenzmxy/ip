@@ -50,6 +50,10 @@ public class Parser {
             return true;
         }
 
+        if (input.equals("edit ") || input.startsWith("edit")) {
+            return editCommand(input);
+        }
+
         if (input.startsWith("mark ")) {
             return markingCommand(input);
         }
@@ -83,6 +87,35 @@ public class Parser {
         throw new ComSciException(
                 "Sorry, Idk what you talking about."
         );
+    }
+
+    private boolean editCommand(String input) {
+        String[] parts = input.substring(5).trim().split(" ", 2);
+
+        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+            throw new ComSciException("Bro! I need the index and the new description. E.g. edit 2 Read book");
+        }
+
+        int index;
+        try {
+            index = Integer.parseInt(parts[0]) - 1;
+        } catch (NumberFormatException e) {
+            throw new ComSciException("Bro! I need a valid number for the index!");
+        }
+
+        if (index < 0 || index >= taskList.size()) {
+            throw new ComSciException("Bro! That task number is out of range!");
+        }
+
+        Task taskToEdit = taskList.get(index);
+        String oldDesc = taskToEdit.toDisplayString();
+        taskToEdit.setDescription(parts[1].trim());
+
+        storage.save(taskList);
+
+        ui.echo("Got it! I've updated the task from:\n  " + oldDesc
+                + "\nto:\n  " + taskToEdit.toDisplayString());
+        return true;
     }
 
     /**

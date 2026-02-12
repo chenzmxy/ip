@@ -6,7 +6,7 @@ package ComSci.task;
 public class Task {
 
     // base class for the ToDo, Deadline, Event classes
-    protected final String description;
+    protected String description;
     protected boolean isDone;
 
     /**
@@ -37,6 +37,11 @@ public class Task {
     public void unmark() {
         assert isDone : "Bro! The task not done!";
         isDone = false;
+    }
+
+    public void setDescription(String newDescription) {
+        assert newDescription != null : "Bro! Description cannot be null";
+        this.description = newDescription;
     }
 
     public String getDescription() {
