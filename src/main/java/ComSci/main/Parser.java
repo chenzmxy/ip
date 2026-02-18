@@ -47,16 +47,16 @@ public class Parser {
             return taskList.getFormattedList();
         }
 
-        if (input.equals("edit ") || input.startsWith("edit")) {
+        if (input.startsWith("edit")) {
             return editCommand(input);
         }
 
-        if (input.startsWith("mark ")) {
+        if (input.startsWith("mark")) {
             return markingCommand(input);
         }
 
 
-        if (input.startsWith("unmark ")) {
+        if (input.startsWith("unmark")) {
             return unmarkingCommand(input);
         }
 
@@ -233,7 +233,7 @@ public class Parser {
         if (!input.contains(" /from ") || !input.contains(" /to ")) {
             throw new ComSciException(
                     "Bro! This event starts when/ends when?"
-                    + "e.g. event Read book /from 1pm /to 2pm");
+                    + "e.g. event Read book /from 2018-12-01 1800 /to 2018-12-01 2000");
         }
 
         String rest = input.substring(6).trim();
@@ -242,7 +242,7 @@ public class Parser {
 
         if (desc.isEmpty()) {
             throw new ComSciException("Bro! What's the event about? "
-                    + "e.g. event Read book /from 1pm /to 2pm");
+                    + "e.g. event Read book /from 2018-12-01 1800 /to 2018-12-01 2000");
         }
         String from = "";
         String to = "";
@@ -256,6 +256,9 @@ public class Parser {
 
         java.time.LocalDateTime fromDt = DateTimeUtil.parseUserDateTime(from);
         java.time.LocalDateTime toDt = DateTimeUtil.parseUserDateTime(to);
+        if (fromDt.isAfter(toDt)) {
+            throw new ComSciException("Bro! The start time cannot be after the end time!");
+        }
 
         Event e = new Event(desc, fromDt, toDt);
 

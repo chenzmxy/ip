@@ -14,8 +14,20 @@ public class TaskList {
     // tasklist class to store a list of tasks and to manage adding/deleting tasks
     private final List<Task> tasks = new ArrayList<>();
 
-    public void add(Task task) {
+    /**
+     * adds a new task into the list
+     * handles error for duplicates
+     * @param task
+     * @throws ComSciException
+     */
+    public void add(Task task) throws ComSciException {
+        if (isDuplicate(task)) {
+            throw new ComSciException("Bro! You already have this task in your list!");
+        }
         tasks.add(task);
+    }
+    private boolean isDuplicate(Task task) {
+        return tasks.stream().anyMatch(t -> t.getDescription().equals(task.getDescription()));
     }
 
     public int size() {
