@@ -41,7 +41,7 @@ public class Parser {
      */
     public String handleCommand(String input) throws ComSciException {
         if (input.equals("bye")) {
-            return "Dear friend, I hope you enjoyed your stay. See you soon!";
+            return "Dear brother, I hope you enjoyed your stay. See you soon!";
         }
         if (input.equals("list")) {
             return taskList.getFormattedList();
@@ -110,7 +110,7 @@ public class Parser {
 
         storage.save(taskList);
 
-        String msg = ("Got it! I've updated the task from:\n  " + oldDesc
+        String msg = ("Got it bro! Bro changed the following task:\n  " + oldDesc
                 + "\nto:\n  " + taskToEdit.toDisplayString());
         return msg;
     }
@@ -137,7 +137,7 @@ public class Parser {
         task.markDone();
         storage.save(taskList);
 
-        String msg = ("Nice! I've marked this task as done:\n" + task.toDisplayString());
+        String msg = ("Nice job bro! Bro has completed the following task:\n" + task.toDisplayString());
         return msg;
     }
 
@@ -163,7 +163,7 @@ public class Parser {
         task.unmark();
         storage.save(taskList);
 
-        String msg = ("OK, I've marked this task as not done yet:\n" + task.toDisplayString());
+        String msg = ("OK bro, so you actually haven't done this task yet:\n" + task.toDisplayString());
         return msg;
     }
 
@@ -182,7 +182,7 @@ public class Parser {
         ToDo todo = new ToDo(desc);
         taskList.add(todo);
         storage.save(taskList);
-        String msg = ("Got it. I've saved this task:\n"
+        String msg = ("Got it bro! Bro will do the following task::\n"
                 + "  " + todo.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
         return msg;
@@ -201,7 +201,8 @@ public class Parser {
 
         // when the deadline task has no date
         if (byStr.isEmpty()) {
-            throw new ComSciException("Bro! What time are you talking about?");
+            throw new ComSciException("Bro! What time are you talking about? "
+                    + "e.g. deadline Read book /by 2019-06-06 1800");
         }
 
         java.time.LocalDateTime by = DateTimeUtil.parseUserDateTime(byStr);
@@ -209,14 +210,15 @@ public class Parser {
 
         // when the deadline task has no details
         if (parts[0].isEmpty()) {
-            throw new ComSciException("Bro! Why u never do anything?");
+            throw new ComSciException("Bro! Why u never do anything?"
+                    + " e.g. deadline Read book /by 2019-06-06 1800");
         }
 
 
         taskList.add(d);
         storage.save(taskList);
 
-        String msg = ("Got it. I've saved this task:\n"
+        String msg = ("Got it bro! Bro will do the following task:\n"
                 + "  " + d.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
         return msg;
@@ -231,7 +233,7 @@ public class Parser {
         if (!input.contains(" /from ") || !input.contains(" /to ")) {
             throw new ComSciException(
                     "Bro! This event starts when/ends when?"
-            );
+                    + "e.g. event Read book /from 1pm /to 2pm");
         }
 
         String rest = input.substring(6).trim();
@@ -239,7 +241,8 @@ public class Parser {
         String desc = a[0].trim();
 
         if (desc.isEmpty()) {
-            throw new ComSciException("Bro! What's the event about?");
+            throw new ComSciException("Bro! What's the event about? "
+                    + "e.g. event Read book /from 1pm /to 2pm");
         }
         String from = "";
         String to = "";
@@ -258,7 +261,7 @@ public class Parser {
 
         taskList.add(e);
         storage.save(taskList);
-        String msg = ("Got it. I've saved this task:\n"
+        String msg = ("Got it bro! Bro will do the following task:\n"
                 + "  " + e.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
         return msg;
@@ -288,7 +291,7 @@ public class Parser {
         Task removed = taskList.delete(index);
         storage.save(taskList);
 
-        String msg = ("Noted. I've removed this task:\n"
+        String msg = ("Got it bro, you no longer need to do this task: \n"
                 + "  " + removed.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
         return msg;

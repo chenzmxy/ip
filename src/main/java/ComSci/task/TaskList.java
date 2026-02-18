@@ -73,10 +73,10 @@ public class TaskList {
 
         // handle the base case (when there are no elements in the list)
         if (tasks.isEmpty()) {
-            return "Here are the tasks in your list:\n(no tasks yet)";
+            return "Here are the tasks in bro's list:\n(Bro got no tasks sia)";
         }
 
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder sb = new StringBuilder("Here are the tasks in bro's list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1)
                     .append(".")

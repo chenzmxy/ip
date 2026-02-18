@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
      * Displays a greeting message in the dialog container.
      */
     private void showGreeting() {
-        String greetingMessage = "Hello bro! I'm ComSci, your personal tasks management Bro. Today we do what?";
+        String greetingMessage = "Hello brother! I'm ComSci, your personal tasks management Bro. Today we do what?";
         dialogContainer.getChildren().add(DialogBox.getComSciDialog(greetingMessage, dukeImage));
     }
 
@@ -57,15 +57,19 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getComSciDialog(response, dukeImage)
-        );
         if (userInput.getText().equals("bye")) {
             PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
             pause.setOnFinished(event -> Platform.exit());
             pause.play();
         }
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        String processing = "Alright bro, I'm cooking your request.....";
+        dialogContainer.getChildren().add(DialogBox.getComSciDialog(processing, dukeImage));
+        PauseTransition pauseOneSecond = new PauseTransition(Duration.seconds(1));
+        pauseOneSecond.setOnFinished(event -> {
+            dialogContainer.getChildren().add(DialogBox.getComSciDialog(response, dukeImage));
+        });
+        pauseOneSecond.play();
         userInput.clear();
     }
 }
