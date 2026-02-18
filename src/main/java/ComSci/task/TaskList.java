@@ -36,20 +36,18 @@ public class TaskList {
 
     /**
      * finds the name of the task by its keyword
+     * using stream to:
+     * 1. look for every task description
+     * 2. determine if these descriptions contain the keyword
+     * 3. filter out those who do not have the keyword
+     * 4. put the rest into a list and return
      * @param keyword
      * @return
      */
     public List<Task> findByKeyword(String keyword) {
-        String needle = keyword.trim().toLowerCase();
-        List<Task> results = new ArrayList<>();
-
-        for (Task t : tasks) { // assuming your internal list is called tasks
-            String hay = t.getDescription().toLowerCase();
-            if (hay.contains(needle)) {
-                results.add(t);
-            }
-        }
-        return results;
+        return tasks.stream().filter(t -> t.getDescription().toLowerCase().contains(
+                keyword.trim().toLowerCase()
+        )).toList();
     }
 
     /**

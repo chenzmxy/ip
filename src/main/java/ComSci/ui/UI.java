@@ -15,10 +15,9 @@ public class UI {
      * greets the users
      */
     public void greeting() {
-        System.out.println(LINE + "\n"
+        System.out.println("\n"
                         + "Hello! I'm ComSci\n"
                         + "What can I do for you?\n"
-                        + LINE
         );
     }
 
@@ -48,9 +47,8 @@ public class UI {
      */
     public void echo(String s) {
         System.out.println(
-                LINE + "\n"
+                "\n"
                 + s + "\n"
-                + LINE
         );
     }
 
@@ -58,9 +56,8 @@ public class UI {
      * farewell
      */
     public void showBye() {
-        System.out.println(LINE + "\n"
+        System.out.println("\n"
                         + "Bye. Hope to see you again soon!\n"
-                        + LINE
         );
     }
 }

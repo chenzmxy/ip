@@ -54,6 +54,7 @@ application {
 
 shadowJar {
     archiveBaseName = 'ComSci'
+    archiveFileName = 'ComSci.jar'
     archiveClassifier = null
 }
 
