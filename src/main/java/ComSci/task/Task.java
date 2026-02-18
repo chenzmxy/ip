@@ -25,7 +25,11 @@ public class Task {
      * Throws an assertion error if the task is already marked as done.
      */
     public void markDone() {
-        assert !isDone : "Bro! You already marked this task as done!";
+        try {
+            assert !isDone : "Bro! The task already done!";
+        } catch (AssertionError e) {
+            System.out.println(e.getMessage());
+        }
         isDone = true;
     }
 
@@ -35,7 +39,11 @@ public class Task {
      * If the task is not already marked as done, an assertion error will be thrown.
      */
     public void unmark() {
-        assert isDone : "Bro! The task not done!";
+        try {
+            assert isDone : "Bro! The task not done yet!";
+        } catch (AssertionError e) {
+            System.out.println(e.getMessage());
+        }
         isDone = false;
     }
 

@@ -1,4 +1,2 @@
-T | 0 | asd
-T | 0 | read
-T | 0 | rewqq
-T | 0 | reading
+T | 0 | 23
+T | 1 | 67

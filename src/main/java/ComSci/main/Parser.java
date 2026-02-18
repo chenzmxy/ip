@@ -39,15 +39,12 @@ public class Parser {
      * todo/deadline/event: creates instances for the tasks
      * delete: asks the tasklist to delete
      */
-    public boolean handleCommand(String input) throws ComSciException {
+    public String handleCommand(String input) throws ComSciException {
         if (input.equals("bye")) {
-            ui.showBye();
-            return false;
+            return "Dear friend, I hope you enjoyed your stay. See you soon!";
         }
-
         if (input.equals("list")) {
-            ui.echo(taskList.getFormattedList());
-            return true;
+            return taskList.getFormattedList();
         }
 
         if (input.equals("edit ") || input.startsWith("edit")) {
@@ -89,7 +86,7 @@ public class Parser {
         );
     }
 
-    private boolean editCommand(String input) {
+    private String editCommand(String input) {
         String[] parts = input.substring(5).trim().split(" ", 2);
 
         if (parts.length < 2 || parts[1].trim().isEmpty()) {
@@ -113,9 +110,9 @@ public class Parser {
 
         storage.save(taskList);
 
-        ui.echo("Got it! I've updated the task from:\n  " + oldDesc
+        String msg = ("Got it! I've updated the task from:\n  " + oldDesc
                 + "\nto:\n  " + taskToEdit.toDisplayString());
-        return true;
+        return msg;
     }
 
     /**
@@ -123,7 +120,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean markingCommand(String input) {
+    private String markingCommand(String input) {
         int index;
         // 2 scenarios: no index or index out of range
         try {
@@ -140,8 +137,8 @@ public class Parser {
         task.markDone();
         storage.save(taskList);
 
-        ui.echo("Nice! I've marked this task as done:\n" + task.toDisplayString());
-        return true;
+        String msg = ("Nice! I've marked this task as done:\n" + task.toDisplayString());
+        return msg;
     }
 
     /**
@@ -149,7 +146,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean unmarkingCommand(String input) {
+    private String unmarkingCommand(String input) {
         int index;
         // 2 scenarios: no index or index out of range
         try {
@@ -166,8 +163,8 @@ public class Parser {
         task.unmark();
         storage.save(taskList);
 
-        ui.echo("OK, I've marked this task as not done yet:\n" + task.toDisplayString());
-        return true;
+        String msg = ("OK, I've marked this task as not done yet:\n" + task.toDisplayString());
+        return msg;
     }
 
     /**
@@ -175,7 +172,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean toDoCommand(String input) {
+    private String toDoCommand(String input) {
         String desc = input.length() > 4 ? input.substring(4).trim() : "";
 
         // when the todo task has no details
@@ -185,10 +182,10 @@ public class Parser {
         ToDo todo = new ToDo(desc);
         taskList.add(todo);
         storage.save(taskList);
-        ui.echo("Got it. I've saved this task:\n"
+        String msg = ("Got it. I've saved this task:\n"
                 + "  " + todo.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
-        return true;
+        return msg;
     }
 
     /**
@@ -196,7 +193,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean deadlineCommand(String input) {
+    private String deadlineCommand(String input) {
         String rest = input.substring(9).trim();
         String[] parts = rest.split(" /by ", 2);
         String desc = parts[0].trim();
@@ -219,10 +216,10 @@ public class Parser {
         taskList.add(d);
         storage.save(taskList);
 
-        ui.echo("Got it. I've saved this task:\n"
+        String msg = ("Got it. I've saved this task:\n"
                 + "  " + d.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
-        return true;
+        return msg;
     }
 
     /**
@@ -230,7 +227,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean eventCommand(String input) {
+    private String eventCommand(String input) {
         if (!input.contains(" /from ") || !input.contains(" /to ")) {
             throw new ComSciException(
                     "Bro! This event starts when/ends when?"
@@ -261,10 +258,10 @@ public class Parser {
 
         taskList.add(e);
         storage.save(taskList);
-        ui.echo("Got it. I've saved this task:\n"
+        String msg = ("Got it. I've saved this task:\n"
                 + "  " + e.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
-        return true;
+        return msg;
     }
 
     /**
@@ -272,7 +269,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean deleteCommand(String input) {
+    private String deleteCommand(String input) {
         if (input.equals("delete")) {
             throw new ComSciException("Bro! What am I supposed to delete? E.g. delete 2");
         }
@@ -291,10 +288,10 @@ public class Parser {
         Task removed = taskList.delete(index);
         storage.save(taskList);
 
-        ui.echo("Noted. I've removed this task:\n"
+        String msg = ("Noted. I've removed this task:\n"
                 + "  " + removed.toDisplayString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list.");
-        return true;
+        return msg;
     }
 
     /**
@@ -302,7 +299,7 @@ public class Parser {
      * @param input
      * @return
      */
-    private boolean findCommand(String input) {
+    private String findCommand(String input) {
         String keyword = input.length() > 4 ? input.substring(4).trim() : "";
 
         if (keyword.isEmpty()) {
@@ -310,7 +307,7 @@ public class Parser {
         }
 
         java.util.List<Task> found = taskList.findByKeyword(keyword);
-        ui.echo(ui.formatFoundTasks(found));
-        return true;
+        String msg = (ui.formatFoundTasks(found));
+        return msg;
     }
 }

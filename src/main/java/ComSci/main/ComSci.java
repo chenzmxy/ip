@@ -26,9 +26,6 @@ public class ComSci {
      */
     public void run() {
         storage.loadInto(taskList);
-        ui.greeting();
-        processCommands();
-        scanner.close();
     }
 
     /**
@@ -38,18 +35,17 @@ public class ComSci {
      * - Catches and handles custom {@code ComSciException} instances when command processing encounters errors.
      * - Displays error messages to the user through the UI.
      */
-    private void processCommands() {
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String input = readInput();
-                isRunning = parser.handleCommand(input);
-            } catch (ComSciException e) {
-                handleError(e);
-            }
-        }
-    }
-
+//    private void processCommands() {
+//        boolean isRunning = true;
+//        while (isRunning) {
+//            try {
+//                String input = readInput();
+//                isRunning = parser.handleCommand(input);
+//            } catch (ComSciException e) {
+//                handleError(e);
+//            }
+//        }
+//    }
     private String readInput() {
         return scanner.nextLine().trim();
     }
@@ -64,7 +60,14 @@ public class ComSci {
      * @param input
      */
     public String getResponse(String input) {
-        return "Hey bro! " + input;
+        try {
+            // Use Parser to process the input and return appropriate response
+            return parser.handleCommand(input);
+        } catch (ComSciException e) {
+            // Return error message if a ComSciException is encountered
+            return e.getMessage();
+        }
+
     }
 
 

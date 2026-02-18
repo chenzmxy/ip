@@ -1,5 +1,7 @@
 package ComSci.main;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for the main GUI.
  */
@@ -33,6 +37,16 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setDuke(ComSci d) {
         duke = d;
+        d.run();
+        showGreeting();
+    }
+
+    /**
+     * Displays a greeting message in the dialog container.
+     */
+    private void showGreeting() {
+        String greetingMessage = "Hello bro! I'm ComSci, your personal tasks management Bro. Today we do what?";
+        dialogContainer.getChildren().add(DialogBox.getComSciDialog(greetingMessage, dukeImage));
     }
 
     /**
@@ -47,6 +61,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getComSciDialog(response, dukeImage)
         );
+        if (userInput.getText().equals("bye")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(2.5));
+            pause.setOnFinished(event -> Platform.exit());
+            pause.play();
+        }
         userInput.clear();
     }
 }

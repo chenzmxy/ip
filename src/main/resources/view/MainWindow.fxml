@@ -46,12 +46,6 @@
                       prefWidth="388.0" />
             </content>
         </ScrollPane>
-
-        <HBox spacing="10" style="-fx-background-color: #4682B4; -fx-padding: 10;" AnchorPane.topAnchor="0.0"
-              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0">
-            <Label text="ComSci Assistant" style="-fx-font-size: 12px; -fx-text-fill: white;"/>
-        </HBox>
-
     </children>
 </AnchorPane>
 
