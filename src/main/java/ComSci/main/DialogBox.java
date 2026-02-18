@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -34,8 +35,19 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Set dialog text and style
         dialog.setText(text);
+        dialog.setWrapText(true); // Ensures text wraps within the dialog box
+        dialog.setStyle("-fx-background-color: #F6D55C; -fx-text-fill: #000000;"
+                + "-fx-padding: 10; -fx-border-radius: 10; -fx-background-radius: 10;");
+
+        // Set profile image with circular cropping
         displayPicture.setImage(img);
+        Circle clip = new Circle(25, 25, 25); // Circular crop: radius = 25px
+        displayPicture.setClip(clip);
+        displayPicture.setFitWidth(50); // Resize image to a consistent size
+        displayPicture.setFitHeight(50);
+
     }
 
     /**
@@ -49,12 +61,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getComSciDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color: #F6D55C; -fx-text-fill: #000000;" // Example: yellow for bot
+                + "-fx-padding: 10; -fx-border-radius: 10; -fx-background-radius: 10;");
+        return db;
+
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.flip(); // Flip user dialog (image on the right, text on the left)
+        db.dialog.setStyle("-fx-background-color: #20639B; -fx-text-fill: #FFFFFF;" // Example: blue for user
+                + "-fx-padding: 10; -fx-border-radius: 10; -fx-background-radius: 10;");
         return db;
+
     }
 }
