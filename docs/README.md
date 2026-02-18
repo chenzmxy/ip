@@ -1,30 +1,59 @@
-# Duke User Guide
+# The ComSci ChatterBot: Your Personal Computer Science Buddy
 
-// Update the title above to match the actual product name
+Welcome to **ComSci**, your best bro in your task management life!
+Are you tired of remembering your own tasks? Do not worry! This is the perfect bro you can go to!
 
-// Product screenshot goes here
+---
 
-// Product intro goes here
+## Getting Started
 
-## Adding deadlines
+**Prerequisites**:
+- Ensure you have an internet connection (yes, ChatterBot lives online!).
+- Having something to do in your mind (Of Course, you can put "doing 67~ as your task as well... but strongly not recommended).
 
-// Describe the action and its outcome.
+---
 
-// Give examples of usage
+## Setting Up and Chit-Chatting
 
-Example: `keyword (optional arguments)`
+### Step 1: Summon the Bot
+1. Open the app or website where ComSci is hosted.
+2. Do nothing and let ComSci cook.
+3. You’ll be greeted with a cheerful "Hello!" code snippet (metaphorically speaking).
 
-// A description of the expected outcome goes here
+---
 
-```
-expected output
-```
+### Step 2: Talk to the Bot
 
-## Feature ABC
-
-// Feature details
+You can ask the bot anything! (Well... anything related to your tasks)
 
 
-## Feature XYZ
+## Tips and Tricks
+1. **Be Specific** 🤔  
+   Instead of saying:  
+   *my deadline is coming up sia...*  
+   Put:  
+   *deadline CS2103T ip submission /by 2026-02-20 2359*
+   Because in Computer Science, we need everything to be specific~~~~ so does the ComSci bot!
 
-// Feature details
+3. **If you want to edit/delete stuff** 🎉  
+   Try typing: "edit 2 do my CS2103T tutorial"
+   Or "delete 2"
+   If you have a CS2103 task as your second one! But better not don't delete cus if you do that, your laptop screen will be brighter than      your future...
+
+5. **Overseeing my tasks** 🏆  
+   Just type "list", and you can view all your tasks!
+
+6. **If I completed my tasks?** 📚  
+   The "mark" command will do the trick!
+   Just type "mark" followed by a number!
+   If you want to unmark it, just use "unmark"
+
+7. **Jialad, I forgot my task details...**
+   Don't worry, it's better than you forgetting to submit your assignment...
+   Anyways, you can use "find" followed by the keywords of your task to view the details of your task!
+
+---
+
+That’s it, bros! Get ready to welcome your new best buddy in your journey of life!
+
+
