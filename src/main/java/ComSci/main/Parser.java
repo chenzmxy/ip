@@ -32,12 +32,13 @@ public class Parser {
 
     /**
      * possible input:
-     * bye: greets goodbye from ui class and terminate
+     * bye: greets goodbye from ui class and terminates
      * list: asks the tasklist to show tasks
      * mark: asks the Task class to mark done
      * unmark: asks the Task class to mark undone
      * todo/deadline/event: creates instances for the tasks
      * delete: asks the tasklist to delete
+     * edit: edit the details of the selected task
      */
     public String handleCommand(String input) throws ComSciException {
         if (input.equals("bye")) {
