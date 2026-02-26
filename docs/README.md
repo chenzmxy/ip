@@ -9,6 +9,7 @@ Are you tired of remembering your own tasks? Do not worry! This is the perfect b
 
 **Prerequisites**:
 - Ensure you have an internet connection (yes, ChatterBot lives online!).
+- Download the chatbot onto your computer (then you can turn off your internet connection already...)
 - Having something to do in your mind (Of Course, you can put "doing 67~ as your task as well... but strongly not recommended).
 
 ---
