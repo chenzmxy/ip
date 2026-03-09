@@ -7,8 +7,6 @@ import ComSci.storage.Storage;
 import ComSci.task.TaskList;
 import ComSci.ui.UI;
 
-
-
 /**
  * The main ComSci class for the project
  */
@@ -42,7 +40,7 @@ public class ComSci {
      */
     public String getResponse(String input) {
         try {
-            // Use Parser to process the input and return appropriate response
+            // Use Parser to process the input and return an appropriate response
             return parser.handleCommand(input);
         } catch (ComSciException e) {
             // Return error message if a ComSciException is encountered
