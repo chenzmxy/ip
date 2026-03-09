@@ -1,3 +1,4 @@
-T | 0 | 23
-T | 1 | dsa
+T | 0 | 234
 T | 0 | asd
+T | 0 | comsci
+T | 0 | req

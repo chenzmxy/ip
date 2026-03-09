@@ -12,16 +12,6 @@ public class UI {
             "————————————————————————————————";
 
     /**
-     * greets the users
-     */
-    public void greeting() {
-        System.out.println("\n"
-                        + "Hello! I'm ComSci\n"
-                        + "What can I do for you?\n"
-        );
-    }
-
-    /**
      * some standard interactions with the user inputs
      * @param found
      * @return

@@ -29,9 +29,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaComSci.png"));
 
+    /**
+     * initializes the window
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToWidth(true);
+        dialogContainer.setFillWidth(true);
     }
 
     /** Injects the Duke instance */

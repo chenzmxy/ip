@@ -27,25 +27,6 @@ public class ComSci {
     public void run() {
         storage.loadInto(taskList);
     }
-
-    /**
-     * Processes user commands in a continuous loop until the program is terminated.
-     * Commands are read from user input, parsed, and handled by the parser.
-     * The method halts when the parser signals termination, such as when the "bye" command is issued.
-     * - Catches and handles custom {@code ComSciException} instances when command processing encounters errors.
-     * - Displays error messages to the user through the UI.
-     */
-//    private void processCommands() {
-//        boolean isRunning = true;
-//        while (isRunning) {
-//            try {
-//                String input = readInput();
-//                isRunning = parser.handleCommand(input);
-//            } catch (ComSciException e) {
-//                handleError(e);
-//            }
-//        }
-//    }
     private String readInput() {
         return scanner.nextLine().trim();
     }
